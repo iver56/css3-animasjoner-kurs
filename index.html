@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <title>CSS-animasjoner</title>
+    <style type="text/css">
+	.box {
+		width: 100px;
+		height: 100px;
+		margin: 20px 20px 20px 0;
+	}
+	
+	.smaller {
+		width: 60px;
+		height: 60px;
+		margin: 8px;
+	}
+	
+	.hover-width:hover {
+		width: 150px;
+	}
+	
+	.hover-rotate:hover {
+		-webkit-transform: rotate(15deg);
+	}
+	
+	.hover-skew:hover {
+		-webkit-transform: skew(15deg);
+	}
+	
+	.hover-scale:hover {
+		-webkit-transform: scale(1.3, 0.7);
+	}
+	
+	.hover-translate:hover {
+		-webkit-transform: translate(-15px, 20px);
+	}
+	
+	.red {
+		background-color: red;
+	}
+	
+	.transition {
+		transition: all .5s;
+	}
+	
+	.example-wrapper {
+		background-color: white;
+		padding: 10px;
+	}
+	
+	.my-input {
+		border-radius: 5px;
+		border: 1px solid grey;
+		width: 120px;
+		height: 18px;
+		outline: 0;
+		margin: 20px;
+		padding: 10px;
+		transition: all 0.5s;
+		font-size: 16px;
+	}
+	
+	.my-input:focus {
+		background-color: black;
+		color: white;
+		width: 190px;
+	}
+	
+	.iphone-container {
+
+		/* How pronounced should the 3D effects be */
+		perspective: 800px;
+		-webkit-perspective: 800px;
+
+		background: radial-gradient(#e0e0e0, #aaa);
+		width:350px;
+		height:350px;
+		margin:0 auto;
+		border-radius:6px;
+		position:relative;
+	}
+
+	.iphone-front,
+	.iphone-back {
+
+		/* Enable 3D transforms */
+		transform-style: preserve-3d;
+		-webkit-transform-style: preserve-3d;
+
+		/* We are using two separate divs for the front and back of the
+		   phone. This will hide the divs when they are flipped, so that the
+		   opposite side can be seen:  */
+
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+
+		width:200px;
+		height:333px;
+
+		position:absolute;
+		top:50%;
+		left:50%;
+		margin:-166px 0 0 -100px;
+
+		background:url(http://demo.tutorialzine.com/2013/10/css3-features-you-can-finally-use/assets/img/iphone.png) no-repeat left center;
+
+		/* Animate the transitions */
+		transition:0.8s;
+	}
+
+	.iphone-back{
+
+		/* The back side is flipped 180 deg by default */
+		transform:rotateY(180deg);
+		-webkit-transform:rotateY(180deg);
+
+		background-position:right center;
+	}
+
+	.iphone-container:hover .iphone-front{
+		/* When the iphone-container is hovered, flip the front side and hide it .. */
+		transform:rotateY(180deg);
+		-webkit-transform:rotateY(180deg);
+	}
+
+	.iphone-container:hover .iphone-back{
+		/* .. at the same time flip the back side into visibility */
+		transform:rotateY(360deg);
+		-webkit-transform:rotateY(360deg);
+	}
+	
+	.red-yellow-box {
+		width: 100px;
+		height: 100px;
+		background-color: red;
+		animation: my-color-animation 2s;
+		animation-direction: alternate;
+		animation-iteration-count: infinite;
+		-webkit-animation: my-color-animation 2s;
+		-webkit-animation-direction: alternate;
+		-webkit-animation-iteration-count: infinite;
+	}
+
+	@keyframes my-color-animation
+	{
+		from {background-color: red;}
+		to {background-color: yellow;}
+	}
+
+	@-webkit-keyframes my-color-animation /* Safari and Chrome */
+	{
+		from {background-color: red;}
+		to {background-color: yellow;}
+	}
+	
+	.colorful-box {
+		width: 100px;
+		height: 100px;
+		animation: colorful-animation 4s;
+		animation-direction: alternate;
+		animation-iteration-count: infinite;
+		-webkit-animation: colorful-animation 4s;
+		-webkit-animation-direction: alternate;
+		-webkit-animation-iteration-count: infinite;
+	}
+	
+	@keyframes colorful-animation
+	{
+		0%   {background-color: red;}
+		25%  {background-color: yellow;}
+		50%  {background-color: orange;}
+		100% {background-color: green;}
+	}
+		
+	@-webkit-keyframes colorful-animation
+	{
+		0%   { background-color: red; margin-left: 0px; }
+		25%  { background-color: yellow; margin-left: 50px; }
+		50%  { background-color: orange; margin-left: 30px;}
+		100% { background-color: green; margin-left: 200px;}
+	}	
+	
+	.my-final-box {
+		width: 50px;
+		height: 50px;
+		animation: my-final-animation 2.5s;
+		animation-direction: alternate;
+		animation-iteration-count: infinite;
+		-webkit-animation: my-final-animation 2.5s;
+		-webkit-animation-direction: alternate;
+		-webkit-animation-iteration-count: infinite;
+		position: relative;
+	}
+	
+	@keyframes my-final-animation
+	{
+		0%   {background-color: red; margin-left: 0;}
+		50%  {background-color: pink; transform: rotate(90deg); margin-left: 250px;}
+		100% {background-color: orange; transform: rotate(180deg); margin-left: 300px; transform: translate(0, 150px);}
+	}
+		
+	@-webkit-keyframes my-final-animation
+	{
+		0%   {
+			background-color: red; margin-left: 0;
+		}
+		50%  {
+			background-color: pink; -webkit-transform: rotate(90deg); margin-left: 250px;
+		}
+		100% {
+			background-color: orange; -webkit-transform: rotate(180deg); margin-left: 300px; -webkit-transform: translate(0, 150px);
+		}
+	}
+    </style>
+    <script src=remark-0.5.7.min.js></script>
+    <link rel=stylesheet type=text/css href=res/css/style.css />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Glidende overganger og animasjoner med CSS3
+
+???
+Hvorfor CSS-animasjoner? Hardware-akselerert, bred støtte og hakker mindre enn jQuery sine animasjoner.
+---
+
+#Sjekk browser-kompatibilitet!
+
+http://caniuse.com
+
+???
+
+Både transitions of animations har nå bred støtte. Kan hende at du må bruke -webkit-
+
+---
+
+# Animere mellom to tilstander
+<table>
+	<tr>
+		<td style="width: 200px"><div class="box hover-width red"></div></td>
+		<td>ingen glidende overgang</td>
+	</tr>
+	<tr>
+		<td style="width: 200px"><div class="box hover-width red transition"></div></td>
+		<td>transition:&nbsp;width&nbsp;0.5s;</td>
+	</tr>
+</table>
+
+???
+Transition gjør slik at hvis det oppstår en endring i en attributt så animeres denne attributten i stedet for å gi en momentant endring.
+Endring i en attributt kan skje hvis man legger på en klasse eller endrer en attributt ved hjelp av jQuery eller hvis man har definert en egen stil for hover eller focus eller noe sånt i css.
+
+---
+
+```html
+<div class="red-box"></div>
+```
+
+```css
+.red-box {
+	width: 100px;
+	height: 100px;
+	background-color: red;
+	transition: width 0.5s;
+}
+
+.red-box:hover {
+	width: 150px;
+}
+```
+<div class="box red hover-width transition"></div>
+???
+Legg merke til at transition må være satt mens endringen i bredden skjer for at det skal bli en glidende overgang. Altså ikke flytt transition til hover.
+---
+
+#Transition
+
+* property
+* duration
+* timing-function
+* delay
+
+Eksempel:
+transition:&nbsp;height&nbsp;2s&nbsp;linear&nbsp;0.5s;
+
+???
+Property: typiske ting som kan animeres er størrelse, posisjon, farge, rotasjon og sånn. Nevn at property kan være all.
+Timing function betyr hvordan overgangen animeres, f.eks fort i starten og tregere mot slutten, eller f.eks lineært (altså like fort hele tiden).
+Demonstrer timing-function her: http://css3.bradshawenterprises.com/transitions/
+---
+
+#Oppgave
+Lag dette:
+<div class="example-wrapper">
+	<input class="my-input" placeholder="Søk" />
+</div>
+
+<span style="font-family: 'Arial';">
+[cssdesk.com/UgPLV](http://cssdesk.com/UgPLV)
+</span>
+???
+Gå inn på siden og vis hvordan man starter
+---
+
+#Transform
+
+<table>
+	<tr>
+		<td><div class="box smaller hover-rotate red transition"></div></td>
+		<td>transform: rotate(15deg);</td>
+	</tr>
+	<tr>
+		<td><div class="box smaller hover-skew red transition"></div></td>
+		<td>transform: skew(15deg);</td>
+	</tr>
+	<tr>
+		<td><div class="box smaller hover-scale red transition"></div></td>
+		<td>transform: scale(1.3,&nbsp;0.7);</td>
+	</tr>
+	<tr>
+		<td><div class="box smaller hover-translate red transition"></div></td>
+		<td>transform:&nbsp;translate(-15px,&nbsp;20px);</td>
+	</tr>
+</table>
+
+???
+
+Nevn at hvis man skal bruke transform må man ha med -webkit i tillegg
+
+---
+
+#3D transform
+<div class="iphone-container">
+	<div class="iphone-front"></div>
+	<div class="iphone-back"></div>
+</div>
+
+???
+Jeg går ikke inn på koden her, men dere skal iallfall vite at dette er mulig med dagens css.
+
+---
+
+#CSS3-animasjoner
+
+"Flere glidende overganger etter hverandre"
+
+???
+Keyframes
+Animasjoner kan repeteres, spilles baklengs etc.
+
+---
+
+#Eksempel:
+<span style="font-size: 0.8em">
+[subcide.com/experiments/fail-whale](http://www.subcide.com/experiments/fail-whale/)
+</span>
+
+---
+
+```html
+<div class="red-yellow-box"></div>
+```
+
+```css
+.red-yellow-box {
+	width: 100px;
+	height: 100px;
+	animation: my-animation 2s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+}
+
+@keyframes my-animation
+{
+	from {background-color: red;}
+	to {background-color: yellow;}
+}
+```
+
+<div class="red-yellow-box"></div>
+
+---
+```html
+<div class="colorful-box"></div>
+```
+
+```css
+.colorful-box {
+	width: 100px;
+	height: 100px;
+	animation: colors-animation 4s;
+	animation-direction: alternate;
+	animation-iteration-count: infinite;
+}
+
+@keyframes colorful-animation
+{
+	0%   {background-color: red;}
+	25%  {background-color: yellow;}
+	50%  {background-color: orange;}
+	100% {background-color: green;}
+}
+
+```
+
+<div class="colorful-box"></div>
+
+---
+
+#Oppgave
+Lag dette (eller noe lignende):
+<div class="example-wrapper" style="height: 200px;">
+	<div class="my-final-box"></div>
+</div>
+
+<span style="font-family: 'Arial';">
+[cssdesk.com/4PHJp](http://cssdesk.com/4PHJp)
+</span>
+???
+Nevn dette med -webkit-
+---
+
+    </textarea>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+    <script src=script.js></script>
+  </body>
+</html>
